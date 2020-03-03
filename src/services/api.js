@@ -11,3 +11,17 @@ export const getRecipes = async recipeName => {
   console.log('recipes', recipes)
   return recipes
 }
+
+export const getRecipe = async uri => {
+  const encodedUri = encodeURIComponent(uri)
+
+  const api_call = await fetch(
+    `${BASE_URL}?r=${encodedUri}&app_id=${APP_ID}&app_key=${APP_KEY}`
+  )
+
+  const data = await api_call.json()
+
+  const recipe = data[0]
+
+  return recipe
+}
